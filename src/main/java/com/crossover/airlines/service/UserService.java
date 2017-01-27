@@ -1,6 +1,9 @@
 package com.crossover.airlines.service;
 
 import com.crossover.airlines.domain.User;
+import com.crossover.airlines.repository.UserRepository;
+import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,9 +12,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    public String generateId(User user){
+    @Autowired
+    private UserRepository userRepository;
 
-        return  user.getId();
+    public User generateId(String userData){
+
+        Gson gson = new Gson();
+        User user = gson.fromJson(userData,User.class);
+        userRepository.save(user);
+        return  user;
 
     }
 }

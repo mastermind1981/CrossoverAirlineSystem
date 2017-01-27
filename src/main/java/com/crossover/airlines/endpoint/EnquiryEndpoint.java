@@ -20,11 +20,12 @@ public class EnquiryEndpoint {
     @Autowired
     private UserService userService;
 
-//
-    @RequestMapping(method = RequestMethod.POST, value = "/register", produces = "application/json")
-    public User Register(@RequestBody User user){
+    //
+    @RequestMapping(method = RequestMethod.PUT, value = "/register",
+            consumes = "application/json", produces = "application/json")
+    public User Register(@RequestBody String user) {
         System.out.println("sdfsdf");
-        return null;
+        return userService.generateId(user);
 //        return enquiryService.getLiveStatus();
     }
 //
