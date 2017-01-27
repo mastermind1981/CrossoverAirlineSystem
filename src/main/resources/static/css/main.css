@@ -1,0 +1,18 @@
+.nav-top{
+    padding-top: 3%
+}
+
+
+.trainsched-top{
+    padding-top: 5%
+}
+
+
+body{
+
+    /*background-color:blanchedalmond;*/
+    background-image: url("../images/trainBackground.jpg");
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+    /*background-repeat: repeat-x;*/
+}
