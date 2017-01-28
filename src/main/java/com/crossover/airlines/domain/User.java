@@ -1,13 +1,16 @@
 package com.crossover.airlines.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 /**
  * Created by sjain on 1/26/2017.
  */
+
+@Entity
+@Table
 public class User {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     private String emailId;
