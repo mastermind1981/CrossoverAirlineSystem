@@ -19,7 +19,13 @@ public class UserService {
 
         Gson gson = new Gson();
         User user = gson.fromJson(userData,User.class);
-        userRepository.save(user);
+        User temp =userRepository.findByEmailId(user.getEmailId());
+        if(temp == null){
+        user= userRepository.save(user);
+        }
+        else{
+            user=temp;
+        }
         return  user;
 
     }

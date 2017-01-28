@@ -20,7 +20,6 @@ public class UserRegistrationendpoint {
     @RequestMapping(method = RequestMethod.POST, value = "/register",
             consumes = "application/json", produces = "application/json")
     public User Register(@RequestBody String user) {
-        System.out.println("sdfsdf");
         return userService.generateId(user);
     }
 
