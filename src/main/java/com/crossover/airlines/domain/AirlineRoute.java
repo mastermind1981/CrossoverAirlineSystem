@@ -1,6 +1,14 @@
 package com.crossover.airlines.domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class AirlineRoute {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String id;
+
     private String from;
     private String to;
 
