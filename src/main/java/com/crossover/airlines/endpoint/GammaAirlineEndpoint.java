@@ -1,12 +1,10 @@
 package com.crossover.airlines.endpoint;
 
 import com.crossover.airlines.domain.AirlineOffer;
+import com.crossover.airlines.domain.AirlineTicket;
 import com.crossover.airlines.service.GammaAirlinesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,4 +18,16 @@ public class GammaAirlineEndpoint {
     public List<AirlineOffer> listAirlineOffer(@PathVariable String applicantId) {
         return gammaAirlinesService.listAllAirlineOffer(applicantId);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/{applicantId}/gammaairlines/tickets/buy",
+            consumes = "application/json", produces = "application/json")
+    public String buyAirlineTicket(@RequestBody String applicantId) {
+        return gammaAirlinesService.buyAirlineTicket(applicantId);
+    }
+
+    @RequestMapping(method = RequestMethod.GET,value = "/{applicantId}/gammaairlines/tickets",produces = "application/json")
+    public List<AirlineTicket> listAllAirlineTicket(@PathVariable String applicantId) {
+        return gammaAirlinesService.listAllAirlineTicket(applicantId);
+    }
+
 }

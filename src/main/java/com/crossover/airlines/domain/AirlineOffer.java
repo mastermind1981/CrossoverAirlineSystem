@@ -4,6 +4,7 @@ public class AirlineOffer {
     private MonetaryAmount price;
     private AirlineRoute route;
 
+
     public AirlineOffer(MonetaryAmount price, AirlineRoute route) {
         this.price = price;
         this.route = route;
