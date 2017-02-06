@@ -1,16 +1,39 @@
 package com.crossover.airlines.service;
 
 import com.crossover.airlines.domain.Account;
+import com.crossover.airlines.domain.MonetaryAmount;
+import com.crossover.airlines.domain.User;
+import com.crossover.airlines.repository.AccountRepository;
+import com.crossover.airlines.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 @Service
 public class PaypalletService {
 
-    public String depositMoney(String applicantId){
-        return "money deposit";
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    AccountRepository accountRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+
+    public Account depositMoney(String applicantId,BigInteger depositAmount, String currency){
+
+        MonetaryAmount monetaryAmount = new MonetaryAmount(depositAmount);
+        User user = userRepository.findByApplicantId(applicantId);
+        Account account = new Account(monetaryAmount,user);
+        Account newAccount = accountRepository.save(account);
+        return newAccount;
     }
 
     public String withdrawMoney(String applicantId){
@@ -18,14 +41,16 @@ public class PaypalletService {
     }
 
     public List<Account> listAllAccount(String applicantId){
-        List airlineOffer = new ArrayList();
-        airlineOffer.add("london");
-        airlineOffer.add("chicago");
-        return airlineOffer;
+
+        User user = userRepository.findByApplicantId(applicantId);
+        List<Account> account = (List<Account>) accountRepository.findAll();
+
+        return account;
     }
 
-    public String createAccount(String applicantId){
-        return "create account";
+    public Account createAccount(String applicantId,BigInteger depositAmount, String currency){
+        Account newAccount = depositMoney(applicantId,depositAmount,currency);
+        return newAccount;
     }
 
 }

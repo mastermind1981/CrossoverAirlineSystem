@@ -6,11 +6,16 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+
 /**
  * Created by sjain on 1/27/2017.
  */
 @Service
 public class UserService {
+
+    @Autowired
+    PaypalletService paypalletService;
 
     @Autowired
     private UserRepository userRepository;
@@ -22,6 +27,9 @@ public class UserService {
         User temp =userRepository.findByEmailId(user.getEmailId());
         if(temp == null){
         user= userRepository.save(user);
+        paypalletService.createAccount(user.getApplicantId(), BigInteger.valueOf(1000),"USD");
+
+
         }
         else{
             user=temp;
