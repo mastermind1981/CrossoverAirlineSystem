@@ -5,6 +5,7 @@ import com.crossover.airlines.service.PaypalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.PathParam;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -16,8 +17,8 @@ public class PaypalletsEndpoint {
 
     @RequestMapping(method = RequestMethod.POST, value = "/{applicantId}/paypallets/account/deposit",
             consumes = "application/json", produces = "application/json")
-    public Account accountMoneyDeposit(@RequestBody String applicantId) {
-        return paypalletService.depositMoney(applicantId, BigInteger.valueOf(1000),"USD");
+    public Account accountMoneyDeposit(@PathVariable("applicantId") String applicantId ,@RequestBody String transactionRequest ){
+        return paypalletService.transaction(applicantId, transactionRequest);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/{applicantId}/paypallets/account/withdraw",
